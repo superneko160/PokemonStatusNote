@@ -20,11 +20,11 @@ const radarConfig = {
     },
 };
 // セレクトボックス
-const pokemonSelect = document.getElementById("pokemonSelect");
+const pokemonSelect = document.getElementById('pokemonSelect');
 // ボタン
-const switchBtn = document.getElementById("switchBtn");
+const switchBtn = document.getElementById('switchBtn');
 // キャンバス
-const radarCtx = document.getElementById("radarChart");
+const radarCtx = document.getElementById('radarChart');
 // レーダチャート
 const radarChart = new Chart(radarCtx, radarConfig);
 
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const data = await response.json();
     // セレクトボックスに選択肢追加
     data.forEach(pokemon => {
-        const option = document.createElement("option");
+        const option = document.createElement('option');
         option.value = pokemon.id;
         option.text = pokemon.name;
         pokemonSelect.appendChild(option);
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 // セレクトボックスの変更イベントリスナ
-pokemonSelect.addEventListener("change", async () => {
+pokemonSelect.addEventListener('change', async () => {
     const selectedId = getSelectedPokemonId();
     // セレクトボックス変更時は一旦種族値表示に戻す
     await loadAndDisplayPokemonData(selectedId);
@@ -56,12 +56,12 @@ pokemonSelect.addEventListener("change", async () => {
 /**
  * 切替ボタンのイベントリスナ
  */
-switchBtn.addEventListener("click", async () => {
+switchBtn.addEventListener('click', async () => {
     // ポケモンのID取得
     const selectedId = getSelectedPokemonId();
     // 種族値データがセットされているときは、努力値データをセット
     if (radarConfig.data.datasets[0].label === '種族値') {
-        loadAndDisplayPokemonData(selectedId, "EV");
+        loadAndDisplayPokemonData(selectedId, 'EV');
     }
     // 努力値データがセットされているときは、種族値データをセット
     else {
@@ -84,11 +84,11 @@ function getSelectedPokemonId() {
  * @param number id ポケモンID
  * @param string chartMode チャートの表示形式（SB:種族値（初期値）、EV:努力値）
  */
-async function loadAndDisplayPokemonData(id, chartMode = "SB") {
+async function loadAndDisplayPokemonData(id, chartMode = 'SB') {
     // IDからポケモンのデータ取得
     const pokemon = await loadPokemonData(id);
     // 種族値のレーダーチャート設定
-    if (chartMode === "SB") {
+    if (chartMode === 'SB') {
         radarConfig.data.datasets = [createChartData('種族値', pokemon.baseStatus, '255, 99, 132')];
     }
     // 努力値のレーダーチャート設定
