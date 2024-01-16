@@ -3,16 +3,71 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chart.jsのテスト</title>
+  <title>PokemonStatusNote</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
   <script src="index.js" defer></script>
 </head>
 <body>
-  <label for="pokemonSelect">ポケモン：</label>
-  <select id="pokemonSelect"></select>
-  <button id="switchBtn">種族値・努力値切替</button>
-  <div style="width:32rem;">
-    <canvas id="radarChart"></canvas>
+  <div class="mt-2 mb-2">
+    <label for="pokemonSelect">ポケモン：</label>
+    <select id="pokemonSelect" class="p-2 rounded-md bg-blue-100"></select>
+    <button id="switchBtn" class="p-2 rounded-md bg-indigo-500 hover:bg-indigo-600 text-zinc-100">SB・EV切替</button>
+  </div>
+  <div class="sm:flex">
+    <div class="sm:w-2/5">
+      <canvas id="radarChart"></canvas>
+    </div>
+    <div class="sm:w-3/5">
+      <table class="min-w-full text-left text-sm font-light">
+        <thead>
+        <tr class="border-b bg-zinc-200 font-medium">
+          <th scope="col" class="px-6 py-4"></th>
+          <th scope="col" class="px-6 py-4">種族値（SB）</th>
+          <th scope="col" class="px-6 py-4">努力値（EV）</th>
+          <th scope="col" class="px-6 py-4">実数値（Lv50）</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="border-b bg-neutral-100">
+          <td class="whitespace-nowrap px-6 py-4">H</td>
+          <td class="whitespace-nowrap px-6 py-4">100</td>
+          <td class="whitespace-nowrap px-6 py-4">100</td>
+          <td class="whitespace-nowrap px-6 py-4">100</td>
+        </tr>
+        <tr class="border-b bg-neutral-100">
+          <td class="whitespace-nowrap px-6 py-4">A</td>
+          <td class="whitespace-nowrap px-6 py-4">100</td>
+          <td class="whitespace-nowrap px-6 py-4">100</td>
+          <td class="whitespace-nowrap px-6 py-4">100</td>
+        </tr>
+        <tr class="border-b bg-neutral-100">
+          <td class="whitespace-nowrap px-6 py-4">B</td>
+          <td class="whitespace-nowrap px-6 py-4">100</td>
+          <td class="whitespace-nowrap px-6 py-4">100</td>
+          <td class="whitespace-nowrap px-6 py-4">100</td>
+        </tr>
+        <tr class="border-b bg-neutral-100">
+          <td class="whitespace-nowrap px-6 py-4">C</td>
+          <td class="whitespace-nowrap px-6 py-4">100</td>
+          <td class="whitespace-nowrap px-6 py-4">100</td>
+          <td class="whitespace-nowrap px-6 py-4">100</td>
+        </tr>
+        <tr class="border-b bg-neutral-100">
+          <td class="whitespace-nowrap px-6 py-4">D</td>
+          <td class="whitespace-nowrap px-6 py-4">100</td>
+          <td class="whitespace-nowrap px-6 py-4">100</td>
+          <td class="whitespace-nowrap px-6 py-4">100</td>
+        </tr>
+        <tr class="border-b bg-neutral-100">
+          <td class="whitespace-nowrap px-6 py-4">S</td>
+          <td class="whitespace-nowrap px-6 py-4">100</td>
+          <td class="whitespace-nowrap px-6 py-4">100</td>
+          <td class="whitespace-nowrap px-6 py-4">100</td>
+        </tr>
+      </tbody>
+      </table>
+    </div>
   </div>
 </body>
 </html>
