@@ -34,7 +34,7 @@ let pokemons = null;
  * ブラウザが読み込まれた最初の1回だけ実行されるイベントリスナ
  */
 document.addEventListener('DOMContentLoaded', async () => {
-    // ポケモンのデータをファイルから取得
+    // ポケモンのデータをファイルから取得し、pokemonsにセット
     pokemons = await loadPokemonData();
     // セレクトボックスに選択肢追加
     pokemons.forEach(pokemon => {
@@ -44,29 +44,29 @@ document.addEventListener('DOMContentLoaded', async () => {
         pokemonSelect.appendChild(option);
     });
     // レーダーチャート表示
-    await loadAndDisplayPokemonData(1);  // 初期表示はID:1のポケモン
+    displayChart(1);  // 初期表示はID:1のポケモン
 });
 
 // セレクトボックスの変更イベントリスナ
-pokemonSelect.addEventListener('change', async () => {
+pokemonSelect.addEventListener('change', () => {
     const selectedId = getSelectedPokemonId();
     // セレクトボックス変更時は一旦種族値表示に戻す
-    await loadAndDisplayPokemonData(selectedId);
+    displayChart(selectedId);
 });
 
 /**
  * 切替ボタンのイベントリスナ
  */
-switchBtn.addEventListener('click', async () => {
+switchBtn.addEventListener('click', () => {
     // ポケモンのID取得
     const selectedId = getSelectedPokemonId();
     // 種族値データがセットされているときは、努力値データをセット
     if (radarConfig.data.datasets[0].label === '種族値') {
-        loadAndDisplayPokemonData(selectedId, 'EV');
+        displayChart(selectedId, 'EV');
     }
     // 努力値データがセットされているときは、種族値データをセット
     else {
-        loadAndDisplayPokemonData(selectedId);
+        displayChart(selectedId);
     }
     // レーダーチャートの更新
     radarChart.update();
@@ -99,11 +99,11 @@ function getSelectedPokemonId() {
 }
 
 /**
- * レーダーチャートの更新
+ * レーダーチャートの表示
  * @param number id ポケモンID
  * @param string chartMode チャートの表示形式（SB:種族値（初期値）、EV:努力値）
  */
-async function loadAndDisplayPokemonData(id, chartMode = 'SB') {
+function displayChart(id, chartMode = 'SB') {
     // IDからポケモンのデータ取得
     const pokemon = getPokemonById(id);
     // 種族値のレーダーチャート設定
