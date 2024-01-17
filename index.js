@@ -9,7 +9,7 @@ const radarConfig = {
     type: 'radar',
     data: {
         labels: ['H', 'A', 'B', 'S', 'D', 'C'],
-        datasets: [createChartData('種族値', [], '255, 99, 132')]  // 初期値：種族値
+        datasets: [createChartData('種族値', [0, 0, 0, 0, 0, 0], '255, 99, 132')]  // 初期値：種族値
     },
     options: {
         elements: {
@@ -25,6 +25,8 @@ const pokemonSelect = document.getElementById('pokemonSelect');
 const switchBtn = document.getElementById('switchBtn');
 // キャンバス
 const radarCtx = document.getElementById('radarChart');
+// テーブルの行
+const tableRows = document.querySelectorAll('tbody tr');
 // レーダチャート
 const radarChart = new Chart(radarCtx, radarConfig);
 // ポケモンのデータ
@@ -43,8 +45,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         option.text = pokemon.name;
         pokemonSelect.appendChild(option);
     });
-    // レーダーチャート表示
-    displayChart(1);  // 初期表示はID:1のポケモン
+    // レーダーチャートとテーブル表示（初期表示はID:1のポケモン）
+    displayChart(1);
+    displayTable(1);
 });
 
 // セレクトボックスの変更イベントリスナ
@@ -52,6 +55,7 @@ pokemonSelect.addEventListener('change', () => {
     const selectedId = getSelectedPokemonId();
     // セレクトボックス変更時は一旦種族値表示に戻す
     displayChart(selectedId);
+    displayTable(selectedId);
 });
 
 /**
@@ -119,15 +123,31 @@ function displayChart(id, chartMode = 'SB') {
 }
 
 /**
+ * テーブルの表示
+ * @param number ポケモンID
+ */
+function displayTable(id) {
+    // IDからポケモンのデータ取得
+    const pokemon = getPokemonById(id);
+    console.log(pokemon);
+    // 各行にデータを表示
+    tableRows.forEach((row, index) => {
+        row.children[1].textContent = pokemon.baseStatus[index];
+        row.children[2].textContent = pokemon.effortValues[index];
+        row.children[3].textContent = "未実装";
+    });
+}
+
+/**
  * レーダーチャートのデータ生成
  * @param string label ラベル
- * @param array data ポケモンのデータ
+ * @param array data ポケモンの数値データ(example: [252, 4, 252, 0, 0, 0])
  * @param string color RGB(example: '255, 255, 255')
  */
 function createChartData(label, data, color) {
     return {
         label: label,
-        data: data,
+        data: switchDataCS(data),  // CSを入れ替えたデータを利用
         fill: true,
         backgroundColor: `rgba(${color}, 0.2)`,
         borderColor: `rgb(${color})`,
@@ -136,4 +156,12 @@ function createChartData(label, data, color) {
         pointHoverBackgroundColor: '#fff',
         pointHoverBorderColor: `rgb(${color})`
     };
+}
+
+/**
+ * ポケモンのデータのCとSの値を入れ替えたデータを作成
+ * @param array data ポケモンの数値データ(example: [252, 4, 252, 0, 0, 0])
+ */
+function switchDataCS(data) {
+    return [data[0], data[1], data[2], data[5], data[4], data[3]];
 }
