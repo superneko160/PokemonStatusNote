@@ -27,16 +27,17 @@ const switchBtn = document.getElementById('switchBtn');
 const radarCtx = document.getElementById('radarChart');
 // レーダチャート
 const radarChart = new Chart(radarCtx, radarConfig);
+// ポケモンのデータ
+let pokemons = null;
 
 /**
  * ブラウザが読み込まれた最初の1回だけ実行されるイベントリスナ
  */
 document.addEventListener('DOMContentLoaded', async () => {
     // ポケモンのデータをファイルから取得
-    const response = await fetch(POKEMONS_FILE);
-    const data = await response.json();
+    pokemons = await loadPokemonData();
     // セレクトボックスに選択肢追加
-    data.forEach(pokemon => {
+    pokemons.forEach(pokemon => {
         const option = document.createElement('option');
         option.value = pokemon.id;
         option.text = pokemon.name;
@@ -72,6 +73,24 @@ switchBtn.addEventListener('click', async () => {
 });
 
 /**
+ * ポケモンデータを読み込む
+ * @returns array ポケモンデータの配列
+ */
+async function loadPokemonData() {
+    const response = await fetch(POKEMONS_FILE);
+    return await response.json();
+}
+
+/**
+ * IDに対応するポケモンデータを取得
+ * @param number id ポケモンID
+ * @returns object ポケモンデータ
+ */
+function getPokemonById(id) {
+    return pokemons.find(pokemon => pokemon.id === id);
+}
+
+/**
  * セレクトボックスで選択された値を取得
  * @returns number ポケモンID
  */
@@ -86,7 +105,7 @@ function getSelectedPokemonId() {
  */
 async function loadAndDisplayPokemonData(id, chartMode = 'SB') {
     // IDからポケモンのデータ取得
-    const pokemon = await loadPokemonData(id);
+    const pokemon = getPokemonById(id);
     // 種族値のレーダーチャート設定
     if (chartMode === 'SB') {
         radarConfig.data.datasets = [createChartData('種族値', pokemon.baseStatus, '255, 99, 132')];
@@ -97,21 +116,6 @@ async function loadAndDisplayPokemonData(id, chartMode = 'SB') {
     }
     // レーダーチャートの更新
     radarChart.update();
-}
-
-/**
- * ファイルからポケモンのデータを読み込む
- * @param number id ポケモンID
- * @returns array selectedPokemon 選択されたポケモンのデータ
- */
-async function loadPokemonData(id) {
-    // ポケモンのデータ取得
-    const response = await fetch(POKEMONS_FILE);
-    const data = await response.json();
-    // IDと一致するポケモンのデータを選択
-    const selectedPokemon = data.find(pokemon => pokemon.id === id);
-    // 取得したデータを返す
-    return selectedPokemon;
 }
 
 /**
