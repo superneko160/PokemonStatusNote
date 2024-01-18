@@ -4,6 +4,8 @@
 const POKEMONS_FILE = 'data/pokemons.json';
 // 最大努力値
 const MAX_EFFORT_VALUE = 252;
+// 個体値
+const INDIVIDUAL_VALUE = 31;
 // レーダチャートの設定
 const radarConfig = {
     type: 'radar',
@@ -131,12 +133,11 @@ function displayChart(id, chartMode = 'SB') {
 function displayTable(id) {
     // IDからポケモンのデータ取得
     const pokemon = getPokemonById(id);
-    console.log(pokemon);
     // 各行にデータを表示
     tableRows.forEach((row, index) => {
         row.children[1].textContent = pokemon.baseStatus[index];
         row.children[2].textContent = pokemon.effortValues[index];
-        row.children[3].textContent = "未実装";
+        row.children[3].textContent = calcActualValue(index, pokemon.baseStatus[index], pokemon.effortValues[index]);
     });
 }
 
@@ -168,4 +169,23 @@ function createChartData(label, data, color) {
  */
 function switchDataCS(data) {
     return [data[0], data[1], data[2], data[5], data[4], data[3]];
+}
+
+/**
+ * 実数値を計算
+ * @param number index インデックス番号(0:H、1:A...)
+ * @param number baseStatus 種族値
+ * @param number effortValue 努力値
+ * @return number 実数値
+ */
+function calcActualValue(index, baseStatus, effortValue) {
+    // H実数値計算
+    if (index === 0) {
+        // H = (種族値 + 個体値 / 2 + 努力値 / 8) + 60
+        return Math.trunc((baseStatus + (INDIVIDUAL_VALUE / 2) + (effortValue / 8)) + 60);
+    }
+    // ABCDS実数値計算
+    const natureCorrection = 1;  // 性格補正
+    // ABCDS = {(種族値 + 個体値 / 2 + 努力値 / 8) + 5} * 性格補正
+    return Math.trunc((baseStatus + (INDIVIDUAL_VALUE / 2) + (effortValue / 8) + 5) * natureCorrection);
 }
