@@ -50,7 +50,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     displayTable(1);
 });
 
-// セレクトボックスの変更イベントリスナ
+/**
+ * セレクトボックスの変更イベントリスナ
+ */
 pokemonSelect.addEventListener('change', () => {
     const selectedId = getSelectedPokemonId();
     // セレクトボックス変更時は一旦種族値表示に戻す
@@ -143,6 +145,7 @@ function displayTable(id) {
  * @param string label ラベル
  * @param array data ポケモンの数値データ(example: [252, 4, 252, 0, 0, 0])
  * @param string color RGB(example: '255, 255, 255')
+ * @return object レーダーチャート設定用データ
  */
 function createChartData(label, data, color) {
     return {
@@ -161,6 +164,7 @@ function createChartData(label, data, color) {
 /**
  * ポケモンのデータのCとSの値を入れ替えたデータを作成
  * @param array data ポケモンの数値データ(example: [252, 4, 252, 0, 0, 0])
+ * @return array CSを入れ替えたポケモンの数値データ(example: [252, 4, 252, 0, 0, 0])
  */
 function switchDataCS(data) {
     return [data[0], data[1], data[2], data[5], data[4], data[3]];
