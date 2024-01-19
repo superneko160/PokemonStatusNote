@@ -4,6 +4,7 @@
         "name": "オーガポン（竈）",
         "nature": "ようき",
         "baseStatus": [80, 120, 84, 60, 96, 110],
+        "individualValues": [31, 31, 31, 31, 31, 31],
         "effortValues": [0, 252, 4, 0, 0, 252]
     },
     {
@@ -11,6 +12,7 @@
         "name": "カイリュー",
         "nature": "わんぱく",
         "baseStatus": [91, 134, 95, 100, 100, 80],
+        "individualValues": [31, 31, 31, 31, 31, 31],
         "effortValues": [244, 0, 156, 0, 0, 108]
     },
     {
@@ -18,6 +20,7 @@
         "name": "サーフゴー",
         "nature": "おくびょう",
         "baseStatus": [87, 60, 95, 133, 91, 84],
+        "individualValues": [31, 0, 31, 31, 31, 31],
         "effortValues": [244, 0, 4, 252, 4, 4]
     },
     {
@@ -25,6 +28,7 @@
         "name": "ウーラオス（連撃）",
         "nature": "いじっぱり",
         "baseStatus": [100, 130, 100, 63, 60, 97],
+        "individualValues": [31, 31, 31, 31, 31, 31],
         "effortValues": [0, 252, 4, 0, 0, 252]
     },
     {
@@ -32,6 +36,7 @@
         "name": "ガチグマ（赫月）",
         "nature": "ひかえめ",
         "baseStatus": [113, 70, 120, 135, 65, 52],
+        "individualValues": [31, 0, 31, 31, 31, 31],
         "effortValues": [180, 0, 4, 252, 72, 0]
     },
     {
@@ -39,6 +44,7 @@
         "name": "ハッサム",
         "nature": "いじっぱり",
         "baseStatus": [70, 130, 100, 65, 80, 65],
+        "individualValues": [31, 31, 31, 31, 31, 31],
         "effortValues": [236, 252, 20, 0, 0, 0]
     },
     {
@@ -46,6 +52,7 @@
         "name": "アシレーヌ",
         "nature": "ずぶとい",
         "baseStatus": [80, 74, 74, 126, 116, 60],
+        "individualValues": [31, 31, 31, 31, 31, 31],
         "effortValues": [252, 0, 236, 0, 0, 20]
     }
 ]
