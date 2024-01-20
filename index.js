@@ -1,9 +1,5 @@
 'use strict';
 
-// ポケモンデータのパス
-const POKEMONS_FILE = 'data/pokemons.json';
-// 最大努力値
-const MAX_EFFORT_VALUE = 252;
 // レーダチャートの設定
 const radarConfig = {
     type: 'radar',
@@ -131,12 +127,14 @@ function displayChart(id, chartMode = 'SB') {
 function displayTable(id) {
     // IDからポケモンのデータ取得
     const pokemon = getPokemonById(id);
+    // 性格補正を行うインデックス取得（無補正：[0, 0]）
+    const natureCorrectionIndexes = NATURES[pokemon.nature] || [0, 0];
     // 各行にデータを表示
     tableRows.forEach((row, index) => {
         row.children[1].textContent = pokemon.baseStatus[index];
         row.children[2].textContent = pokemon.effortValues[index];
         row.children[3].textContent = 
-        `${calcActualValue(index, pokemon.baseStatus[index], pokemon.individualValues[index], pokemon.effortValues[index])} (${pokemon.individualValues[index]})`;
+        `${calcActualValue(index, pokemon.baseStatus[index], pokemon.individualValues[index], pokemon.effortValues[index], natureCorrectionIndexes)} (${pokemon.individualValues[index]})`;
     });
 }
 
@@ -176,16 +174,32 @@ function switchDataCS(data) {
  * @param number baseStatus 種族値
  * @param number individualValue 個体値
  * @param number effortValue 努力値
+ * @param array natureCorrectionIndexes 性格補正するインデックス(example: [1, 2])
  * @return number 実数値
  */
-function calcActualValue(index, baseStatus, individualValue, effortValue) {
+function calcActualValue(index, baseStatus, individualValue, effortValue, natureCorrectionIndexes) {
     // H実数値計算
     if (index === 0) {
         // H = (種族値 + 個体値 / 2 + 努力値 / 8) + 60
         return Math.trunc((baseStatus + (individualValue / 2) + (effortValue / 8)) + 60);
     }
     // ABCDS実数値計算
-    const natureCorrection = 1;  // 性格補正
     // ABCDS = {(種族値 + 個体値 / 2 + 努力値 / 8) + 5} * 性格補正
-    return Math.trunc((baseStatus + (individualValue / 2) + (effortValue / 8) + 5) * natureCorrection);
+    return Math.trunc((baseStatus + (individualValue / 2) + (effortValue / 8) + 5) * getNatureCorrection(index, natureCorrectionIndexes));
+}
+
+/**
+ * 性格補正を行う数値を取得
+ * @param number index 現在のインデックス
+ * @param array natureCorrections 補正を行う必要のあるインデックスのデータ（[上昇補正するパラメータのインデックス, 下降補正するパラメータのインデックス]）
+ * @return number 補正数値（1.1 or 1 or 0.9）
+ */
+function getNatureCorrection(index, natureCorrectionIndexes) {
+    const [upCorrectIndex, downCorrectIndex] = natureCorrectionIndexes;
+    const corrections = {
+        0: 1,
+        [upCorrectIndex]: 1.1,
+        [downCorrectIndex]: 0.9,
+    };
+    return corrections[index] || 1;
 }

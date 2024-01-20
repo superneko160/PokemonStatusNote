@@ -43,7 +43,7 @@
         "id": 6,
         "name": "ハッサム",
         "nature": "いじっぱり",
-        "baseStatus": [70, 130, 100, 65, 80, 65],
+        "baseStatus": [70, 130, 100, 55, 80, 65],
         "individualValues": [31, 31, 31, 31, 31, 31],
         "effortValues": [236, 252, 20, 0, 0, 0]
     },
