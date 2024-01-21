@@ -122,7 +122,7 @@ function displayChart(id, chartMode = 'SB') {
 
 /**
  * テーブルの表示
- * @param number ポケモンID
+ * @param number id ポケモンID
  */
 function displayTable(id) {
     // IDからポケモンのデータ取得
@@ -135,7 +135,46 @@ function displayTable(id) {
         row.children[2].textContent = pokemon.effortValues[index];
         row.children[3].textContent = 
         `${calcActualValue(index, pokemon.baseStatus[index], pokemon.individualValues[index], pokemon.effortValues[index], natureCorrectionIndexes)} (${pokemon.individualValues[index]})`;
+        resetClassCorrectionParam(row);
+        addClassCorrectionParam(row, index, natureCorrectionIndexes)
     });
+}
+
+/**
+ * 性格補正パラメータの色のクラスを消去
+ * @param HTMLElement row 行のHTML要素
+ */
+function resetClassCorrectionParam(row) {
+    const resetClasses = ['text-zinc-700', 'text-red-500', 'text-blue-500'];
+    resetClasses.forEach(className => {
+        row.classList.remove(className);
+    });
+}
+
+/**
+ * 性格補正パラメータの色のクラスを追加
+ * @param HTMLElement row 行のHTML要素
+ * @param number index 現在の行数
+ * @param array natureCorrectionIndexes 性格補正インデックスのデータ
+ */
+function addClassCorrectionParam(row, index, natureCorrectionIndexes) {
+    row.classList.add(getClassCorrectionParam(index, natureCorrectionIndexes));
+}
+
+/**
+ * 性格補正パラメータの色を変更するクラス名を取得
+ * @param number index 現在の行数
+ * @param array natureCorrectionIndexes 性格補正インデックスのデータ
+ * @return string クラス名（テキストカラー）
+ */
+function getClassCorrectionParam(index, natureCorrectionIndexes) {
+    const [upCorrectIndex, downCorrectIndex] = natureCorrectionIndexes;
+    const corrections = {
+        0: 'text-zinc-700',
+        [upCorrectIndex]: 'text-red-500',
+        [downCorrectIndex]: 'text-blue-500',
+    };
+    return corrections[index] || 'text-zinc-700';
 }
 
 /**
