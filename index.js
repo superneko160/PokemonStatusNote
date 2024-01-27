@@ -19,6 +19,12 @@ const radarConfig = {
 const pokemonSelect = document.getElementById('pokemonSelect');
 // ボタン
 const switchBtn = document.getElementById('switchBtn');
+// 性格、特性、持ち物情報欄
+const basicInfoArea = document.getElementById('basicInfoArea');
+// わざ情報欄
+const moveArea = document.getElementById('moveArea');
+// テラスタイプ欄
+const teratypeArea = document.getElementById('teratypeArea');
 // キャンバス
 const radarCtx = document.getElementById('radarChart');
 // テーブルの行
@@ -42,6 +48,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         pokemonSelect.appendChild(option);
     });
     // レーダーチャートとテーブル表示（初期表示はID:1のポケモン）
+    displayBasicInfo(1);
     displayChart(1);
     displayTable(1);
 });
@@ -52,6 +59,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 pokemonSelect.addEventListener('change', () => {
     const selectedId = getSelectedPokemonId();
     // セレクトボックス変更時は一旦種族値表示に戻す
+    displayBasicInfo(selectedId);
     displayChart(selectedId);
     displayTable(selectedId);
 });
@@ -98,6 +106,18 @@ function getPokemonById(id) {
  */
 function getSelectedPokemonId() {
     return parseInt(pokemonSelect.value, 10);
+}
+
+/**
+ * 基本情報の表示
+ * @param number id ポケモンのID
+ */
+function displayBasicInfo(id) {
+    // IDからポケモンのデータ取得
+    const pokemon = getPokemonById(id);
+    basicInfoArea.textContent = `${pokemon.nature} / ${pokemon.ability} / ${pokemon.item}`;
+    moveArea.textContent = `${pokemon.move.join(' / ')}`;
+    teratypeArea.textContent = `テラスタイプ：${pokemon.teratype}`;
 }
 
 /**
