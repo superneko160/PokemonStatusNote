@@ -27,6 +27,8 @@ const moveArea = document.getElementById('moveArea');
 const teratypeArea = document.getElementById('teratypeArea');
 // キャンバス
 const radarCtx = document.getElementById('radarChart');
+// 備考欄
+const noteArea = document.getElementById('noteArea');
 // テーブルの行
 const tableRows = document.querySelectorAll('tbody tr');
 // レーダチャート
@@ -51,6 +53,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     displayBasicInfo(1);
     displayChart(1);
     displayTable(1);
+    displayNote(1);
 });
 
 /**
@@ -62,6 +65,7 @@ pokemonSelect.addEventListener('change', () => {
     displayBasicInfo(selectedId);
     displayChart(selectedId);
     displayTable(selectedId);
+    displayNote(selectedId);
 });
 
 /**
@@ -158,6 +162,16 @@ function displayTable(id) {
         resetClassCorrectionParam(row);
         addClassCorrectionParam(row, index, natureCorrectionIndexes)
     });
+}
+
+/**
+ * 備考欄の表示
+ * @param number id ポケモンID
+ */
+function displayNote(id) {
+    // IDからポケモンのデータ取得
+    const pokemon = getPokemonById(id);
+    noteArea.textContent = `${pokemon.note}`;
 }
 
 /**
