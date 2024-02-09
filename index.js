@@ -23,8 +23,8 @@ const switchBtn = document.getElementById('switchBtn');
 const basicInfoArea = document.getElementById('basicInfoArea');
 // わざ情報欄
 const moveArea = document.getElementById('moveArea');
-// テラスタイプ欄
-const teratypeArea = document.getElementById('teratypeArea');
+// テラスタイプアイコン
+const teratypeIcon = document.getElementById('teratypeIcon');
 // キャンバス
 const radarCtx = document.getElementById('radarChart');
 // 備考欄
@@ -121,7 +121,7 @@ function displayBasicInfo(id) {
     const pokemon = getPokemonById(id);
     basicInfoArea.textContent = `${pokemon.nature} / ${pokemon.ability} / ${pokemon.item}`;
     moveArea.textContent = `${pokemon.move.join(' / ')}`;
-    teratypeArea.textContent = `テラスタイプ：${pokemon.teratype}`;
+    teratypeIcon.src = `data/typeicon/${pokemon.teratype}.svg`;
 }
 
 /**
