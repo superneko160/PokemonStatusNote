@@ -2,7 +2,7 @@
     {
         "id": 1,
         "name": "オーガポン（竈）",
-        "type": ["fire", "grass"],
+        "types": ["fire", "grass"],
         "nature": "ようき",
         "ability": "かたやぶり",
         "item": "かまどのめん",
@@ -16,7 +16,7 @@
     {
         "id": 2,
         "name": "カイリュー",
-        "type": ["dragon", "flying"],
+        "types": ["dragon", "flying"],
         "nature": "わんぱく",
         "ability": "マルチスケイル",
         "item": "ゴツゴツメット",
@@ -30,7 +30,7 @@
     {
         "id": 3,
         "name": "サーフゴー",
-        "type": ["steel", "ghost"],
+        "types": ["steel", "ghost"],
         "nature": "おくびょう",
         "ability": "おうごんのからだ",
         "item": "こだわりメガネ",
@@ -44,7 +44,7 @@
     {
         "id": 4,
         "name": "ウーラオス（連撃）",
-        "type": ["fighting", "water"],
+        "types": ["fighting", "water"],
         "nature": "いじっぱり",
         "ability": "ふかしのこぶし",
         "item": "こだわりスカーフ",
@@ -58,7 +58,7 @@
     {
         "id": 5,
         "name": "ガチグマ（赫月）",
-        "type": ["normal", "ground"],
+        "types": ["normal", "ground"],
         "nature": "ひかえめ",
         "ability": "しんがん",
         "item": "とつげきチョッキ",
@@ -72,7 +72,7 @@
     {
         "id": 6,
         "name": "ハッサム",
-        "type": ["steel", "bug"],
+        "types": ["steel", "bug"],
         "nature": "いじっぱり",
         "ability": "テクニシャン",
         "item": "こだわりハチマキ",
@@ -86,7 +86,7 @@
     {
         "id": 7,
         "name": "アシレーヌ",
-        "type": ["water", "fairy"],
+        "types": ["water", "fairy"],
         "nature": "ずぶとい",
         "ability": "げきりゅう",
         "item": "たべのこし",
@@ -100,7 +100,7 @@
     {
         "id": 8,
         "name": "ハバタクカミ",
-        "type": ["ghost", "fairy"],
+        "types": ["ghost", "fairy"],
         "nature": "おくびょう",
         "ability": "こだいかっせい",
         "item": "ブーストエナジー",

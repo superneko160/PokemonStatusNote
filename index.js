@@ -23,6 +23,8 @@ const switchBtn = document.getElementById('switchBtn');
 const basicInfoArea = document.getElementById('basicInfoArea');
 // わざ情報欄
 const moveArea = document.getElementById('moveArea');
+// タイプアイコン
+const typeIconArea = document.getElementById('typeIconArea');
 // テラスタイプアイコン
 const teratypeIcon = document.getElementById('teratypeIcon');
 // キャンバス
@@ -121,6 +123,39 @@ function displayBasicInfo(id) {
     const pokemon = getPokemonById(id);
     basicInfoArea.textContent = `${pokemon.nature} / ${pokemon.ability} / ${pokemon.item}`;
     moveArea.textContent = `${pokemon.move.join(' / ')}`;
+    displayTypes(pokemon);
+    displayTeraType(pokemon);
+}
+
+/**
+ * タイプ表示個所を初期化
+ */
+function resetTypes() {
+    const imgs = document.querySelectorAll('#typeIconArea img');
+    imgs.forEach(img => {
+        img.remove();
+    });
+}
+
+/**
+ * ポケモンのタイプ表示
+ * @param number pokemon ポケモン
+ */
+function displayTypes(pokemon) {
+    resetTypes();
+    pokemon.types.forEach(type => {
+        const img = document.createElement('img');
+        img.src = `data/typeicon/${type}.svg`;
+        img.classList.add('inline-block', 'w-8', 'mr-1');
+        typeIconArea.appendChild(img);
+    });
+}
+
+/**
+ * ポケモンのテラスタイプ表示
+ * @param number pokemon ポケモン
+ */
+function displayTeraType(pokemon) {
     teratypeIcon.src = `data/typeicon/${pokemon.teratype}.svg`;
 }
 
