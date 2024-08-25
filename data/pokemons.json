@@ -189,7 +189,7 @@
         "ability": "ポイズンヒール",
         "item": "どくどくだま",
         "teratype": "steel",
-        "baseStatus": [80, 74, 74, 126, 116, 60],
+        "baseStatus": [75, 95, 125, 45, 75, 95],
         "individualValues": [31, 31, 0, 31, 31, 31],
         "effortValues": [212, 0, 0, 0, 44, 252],
         "move": ["どくどく", "はたきおとす", "みがわり", "まもる"],
