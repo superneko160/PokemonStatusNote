@@ -198,7 +198,7 @@
     {
         "id": 15,
         "name": "ブリジュラス",
-        "types": ["stell", "dragon"],
+        "types": ["steel", "dragon"],
         "nature": "れいせい",
         "ability": "じきゅうりょく",
         "item": "オボンのみ",
