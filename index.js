@@ -90,7 +90,7 @@ switchBtn.addEventListener('click', () => {
 
 /**
  * ポケモンデータを読み込む
- * @returns array ポケモンデータの配列
+ * @returns {array} ポケモンデータの配列
  */
 async function loadPokemonData() {
     const response = await fetch(POKEMONS_FILE);
@@ -99,8 +99,8 @@ async function loadPokemonData() {
 
 /**
  * IDに対応するポケモンデータを取得
- * @param number id ポケモンID
- * @returns object ポケモンデータ
+ * @param {number} id ポケモンID
+ * @returns {object} ポケモンデータ
  */
 function getPokemonById(id) {
     return pokemons.find(pokemon => pokemon.id === id);
@@ -108,7 +108,7 @@ function getPokemonById(id) {
 
 /**
  * セレクトボックスで選択された値を取得
- * @returns number ポケモンID
+ * @returns {number} ポケモンID
  */
 function getSelectedPokemonId() {
     return parseInt(pokemonSelect.value, 10);
@@ -116,7 +116,7 @@ function getSelectedPokemonId() {
 
 /**
  * 基本情報の表示
- * @param number id ポケモンのID
+ * @param {number} id ポケモンのID
  */
 function displayBasicInfo(id) {
     // IDからポケモンのデータ取得
@@ -139,7 +139,7 @@ function resetTypes() {
 
 /**
  * ポケモンのタイプ表示
- * @param number pokemon ポケモン
+ * @param {number} pokemon ポケモン
  */
 function displayTypes(pokemon) {
     resetTypes();
@@ -153,7 +153,7 @@ function displayTypes(pokemon) {
 
 /**
  * ポケモンのテラスタイプ表示
- * @param number pokemon ポケモン
+ * @param {number} pokemon ポケモン
  */
 function displayTeraType(pokemon) {
     teratypeIcon.src = `data/typeicon/${pokemon.teratype}.svg`;
@@ -161,8 +161,8 @@ function displayTeraType(pokemon) {
 
 /**
  * レーダーチャートの表示
- * @param number id ポケモンID
- * @param string chartMode チャートの表示形式（SB:種族値（初期値）、EV:努力値）
+ * @param {number} id ポケモンID
+ * @param {string} chartMode チャートの表示形式（SB:種族値（初期値）、EV:努力値）
  */
 function displayChart(id, chartMode = 'SB') {
     // IDからポケモンのデータ取得
@@ -181,7 +181,7 @@ function displayChart(id, chartMode = 'SB') {
 
 /**
  * テーブルの表示
- * @param number id ポケモンID
+ * @param {number} id ポケモンID
  */
 function displayTable(id) {
     // IDからポケモンのデータ取得
@@ -201,7 +201,7 @@ function displayTable(id) {
 
 /**
  * 備考欄の表示
- * @param number id ポケモンID
+ * @param {number} id ポケモンID
  */
 function displayNote(id) {
     // IDからポケモンのデータ取得
@@ -211,7 +211,7 @@ function displayNote(id) {
 
 /**
  * 性格補正パラメータの色のクラスを消去
- * @param HTMLElement row 行のHTML要素
+ * @param {HTMLElement} row 行のHTML要素
  */
 function resetClassCorrectionParam(row) {
     const resetClasses = ['text-zinc-700', 'text-red-500', 'text-blue-500'];
@@ -222,9 +222,9 @@ function resetClassCorrectionParam(row) {
 
 /**
  * 性格補正パラメータの色のクラスを追加
- * @param HTMLElement row 行のHTML要素
- * @param number index 現在の行数
- * @param array natureCorrectionIndexes 性格補正インデックスのデータ
+ * @param {HTMLElement} row 行のHTML要素
+ * @param {number} index 現在の行数
+ * @param {array} natureCorrectionIndexes 性格補正インデックスのデータ
  */
 function addClassCorrectionParam(row, index, natureCorrectionIndexes) {
     row.classList.add(getClassCorrectionParam(index, natureCorrectionIndexes));
@@ -232,9 +232,9 @@ function addClassCorrectionParam(row, index, natureCorrectionIndexes) {
 
 /**
  * 性格補正パラメータの色を変更するクラス名を取得
- * @param number index 現在の行数
- * @param array natureCorrectionIndexes 性格補正インデックスのデータ
- * @return string クラス名（テキストカラー）
+ * @param {number} index 現在の行数
+ * @param {array} natureCorrectionIndexes 性格補正インデックスのデータ
+ * @returns {string} クラス名（テキストカラー）
  */
 function getClassCorrectionParam(index, natureCorrectionIndexes) {
     const [upCorrectIndex, downCorrectIndex] = natureCorrectionIndexes;
@@ -248,10 +248,10 @@ function getClassCorrectionParam(index, natureCorrectionIndexes) {
 
 /**
  * レーダーチャートのデータ生成
- * @param string label ラベル
- * @param array data ポケモンの数値データ(example: [252, 4, 252, 0, 0, 0])
- * @param string color RGB(example: '255, 255, 255')
- * @return object レーダーチャート設定用データ
+ * @param {string} label ラベル
+ * @param {array} data ポケモンの数値データ(example: [252, 4, 252, 0, 0, 0])
+ * @param {string} color RGB(example: '255, 255, 255')
+ * @returns {object} レーダーチャート設定用データ
  */
 function createChartData(label, data, color) {
     return {
@@ -269,8 +269,8 @@ function createChartData(label, data, color) {
 
 /**
  * ポケモンのデータのCとSの値を入れ替えたデータを作成
- * @param array data ポケモンの数値データ(example: [252, 4, 252, 0, 0, 0])
- * @return array CSを入れ替えたポケモンの数値データ(example: [252, 4, 252, 0, 0, 0])
+ * @param {array} data ポケモンの数値データ(example: [252, 4, 252, 0, 0, 0])
+ * @returns {array} CSを入れ替えたポケモンの数値データ(example: [252, 4, 252, 0, 0, 0])
  */
 function switchDataCS(data) {
     return [data[0], data[1], data[2], data[5], data[4], data[3]];
@@ -278,12 +278,12 @@ function switchDataCS(data) {
 
 /**
  * 実数値を計算
- * @param number index インデックス番号(0:H、1:A...)
- * @param number baseStatus 種族値
- * @param number individualValue 個体値
- * @param number effortValue 努力値
- * @param array natureCorrectionIndexes 性格補正するインデックス(example: [1, 2])
- * @return number 実数値
+ * @param {number} index インデックス番号(0:H、1:A...)
+ * @param {number} baseStatus 種族値
+ * @param {number} individualValue 個体値
+ * @param {number} effortValue 努力値
+ * @param {array} natureCorrectionIndexes 性格補正するインデックス(example: [1, 2])
+ * @returns {number} 実数値
  */
 function calcActualValue(index, baseStatus, individualValue, effortValue, natureCorrectionIndexes) {
     // H実数値計算
@@ -298,9 +298,9 @@ function calcActualValue(index, baseStatus, individualValue, effortValue, nature
 
 /**
  * 性格補正を行う数値を取得
- * @param number index 現在のインデックス
- * @param array natureCorrections 補正を行う必要のあるインデックスのデータ（[上昇補正するパラメータのインデックス, 下降補正するパラメータのインデックス]）
- * @return number 補正数値（1.1 or 1 or 0.9）
+ * @param {number} index 現在のインデックス
+ * @param {array} natureCorrections 補正を行う必要のあるインデックスのデータ（[上昇補正するパラメータのインデックス, 下降補正するパラメータのインデックス]）
+ * @returns {number} 補正数値（1.1 or 1 or 0.9）
  */
 function getNatureCorrection(index, natureCorrectionIndexes) {
     const [upCorrectIndex, downCorrectIndex] = natureCorrectionIndexes;
