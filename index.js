@@ -5,7 +5,7 @@ const radarConfig = {
     type: 'radar',
     data: {
         labels: ['H', 'A', 'B', 'S', 'D', 'C'],
-        datasets: [createChartData('種族値', [0, 0, 0, 0, 0, 0], '255, 99, 132')]  // 初期値：種族値
+        datasets: [createChartData('種族値', [0, 0, 0, 0, 0, 0], SB_CHART_COLOR)]  // 初期値：種族値
     },
     options: {
         elements: {
@@ -169,11 +169,11 @@ function displayChart(id, chartMode = 'SB') {
     const pokemon = getPokemonById(id);
     // 種族値のレーダーチャート設定
     if (chartMode === 'SB') {
-        radarConfig.data.datasets = [createChartData('種族値', pokemon.baseStatus, '255, 99, 132')];
+        radarConfig.data.datasets = [createChartData('種族値', pokemon.baseStatus, SB_CHART_COLOR)];
     }
     // 努力値のレーダーチャート設定
     else {
-        radarConfig.data.datasets = [createChartData('努力値（%）', pokemon.effortValues.map(value => (value / MAX_EFFORT_VALUE) * 100), '54, 162, 235')];
+        radarConfig.data.datasets = [createChartData('努力値（%）', pokemon.effortValues.map(value => (value / MAX_EFFORT_VALUE) * 100), EV_CHART_COLOR)];
     }
     // レーダーチャートの更新
     radarChart.update();

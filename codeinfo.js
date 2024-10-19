@@ -6,6 +6,10 @@ const POKEMONS_FILE = 'data/pokemons.json';
 // 最大努力値
 const MAX_EFFORT_VALUE = 252;
 
+// レーダーチャート色彩
+const SB_CHART_COLOR = '255, 99, 132';  // 種族値
+const EV_CHART_COLOR = '54, 162, 235';  // 努力値
+
 // ポケモン性格（無補正除く）
 const NATURES = {
     // 性格名 : [上昇補正するパラメータのインデックス, 下降補正するパラメータのインデックス]
